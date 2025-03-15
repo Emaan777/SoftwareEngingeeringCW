@@ -98,5 +98,18 @@ CREATE TABLE activity (
     Location VARCHAR(255),
     Createdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Updatedate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
-);
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE );
+
+-- Table structure for table `UserList` (For User List Page)
+CREATE TABLE `UserList` (
+    `Email` VARCHAR(100) DEFAULT NULL,
+    `ListingDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table `UserList`
+INSERT INTO `UserList` (`Email`) VALUES
+('john.smith@gmail.com'),
+('michelle.rhoades@gmail.com'),
+('alice.johnson@gmail.com'),
+('david.taylor@gmail.com'),
+('sophia.williams@gmail.com');
