@@ -86,3 +86,24 @@ INSERT INTO `UserList` (`Email`) VALUES
 ('alice.johnson@gmail.com'),
 ('david.taylor@gmail.com'),
 ('sophia.williams@gmail.com');
+
+-- Table structure for table `UserDetail` (For User Detail Page)
+CREATE TABLE `UserDetail` (
+    `Email` VARCHAR(100) DEFAULT NULL,
+    `Bio` TEXT DEFAULT NULL,
+    `Interests` VARCHAR(255) DEFAULT NULL,
+    `PreferredActivityTime` ENUM('Morning', 'Afternoon', 'Evening') DEFAULT NULL,
+    `ProfilePicture` VARCHAR(255) DEFAULT NULL,
+    `Createdate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `Updatedate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table `UserDetail`
+INSERT INTO `UserDetail` (`Email`, `Bio`, `Interests`, `PreferredActivityTime`, `ProfilePicture`) VALUES
+('john.smith@gmail.com', 'Love running in the mornings!', 'Trail running, marathon training', 'Morning', 'john_smith.jpg'),
+('michelle.rhoades@gmail.com', 'Casual runner who enjoys exploring new trails.', 'Nature walks, jogging', 'Evening', 'michelle_rhoades.jpg'),
+('alice.johnson@gmail.com', 'Cycling enthusiast! Exploring new bike paths.', 'Long-distance cycling, road biking', 'Afternoon', 'alice_johnson.jpg'),
+('david.taylor@gmail.com', 'Riding for fitness and fun!', 'Group cycling, mountain biking', 'Morning', 'david_taylor.jpg'),
+('sophia.williams@gmail.com', 'Just started running, looking for a partner.', 'Running, stretching', 'Evening', 'sophia_williams.jpg');
+
+COMMIT;
