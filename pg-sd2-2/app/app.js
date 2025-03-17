@@ -13,25 +13,36 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static("static"));
 
 // Get the functions in the db.js file to use
-const db = require('./services/db');
+const db = require("./services/db");
 
-// Dummy user data (Replace this with database query later)
-const user = {
-    FirstName: "John",
-    LastName: "Doe",
-    DateOfBirth: "1990-01-01",
-    Email: "john.doe@example.com",
-    ExercisePreference: "Cardio",
-    Expertise: "Beginner",
-    Bio: "I love running and staying active!"
-};
+// Create a route for the homepage
+app.get("/", function (req, res) {
+    res.send("Welcome! Go to <a href='/profile'>Profile</a>");
+});
 
-// Create a route for the profile page
-app.get("/profile", function(req, res) {
-    res.render("profile", { user: user }); // Render profile.pug and pass user data
+// ✅ UPDATED PROFILE ROUTE (NO SESSION, JUST STATIC EMAIL FOR TESTING)
+app.get("/profile", async function (req, res) {
+    try {
+        const userEmail = "john.smith@gmail.com"; 
+
+        console.log(`Executing query: SELECT * FROM users WHERE Email = ?`, [userEmail]);
+
+        const result = await db.query("SELECT * FROM users WHERE Email = ?", [userEmail]);
+
+        console.log("Database Query Result:", result); // ✅ Log the actual query result
+
+        if (result.length === 0) {
+            return res.status(404).send("User not found");
+        }
+
+        res.render("profile", { user: result[0] }); // ✅ Pass user data to Pug template
+    } catch (error) {
+        console.error("Database Query Error:", error); // ✅ Log actual error
+        res.status(500).send(`Error retrieving user data: ${error.message}`); // ✅ Show real error
+    }
 });
 
 // Start server on port 3000
-app.listen(3000, function() {
+app.listen(3000, function () {
     console.log(`Server running at http://127.0.0.1:3000/`);
 });
