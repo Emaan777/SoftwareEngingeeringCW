@@ -20,25 +20,27 @@ app.get("/", function (req, res) {
     res.send("Welcome! Go to <a href='/profile'>Profile</a>");
 });
 
-// ✅ UPDATED PROFILE ROUTE (NO SESSION, JUST STATIC EMAIL FOR TESTING)
+//  UPDATED PROFILE ROUTE (NO SESSION, JUST STATIC EMAIL FOR TESTING)
 app.get("/profile", async function (req, res) {
     try {
         const userEmail = "john.smith@gmail.com"; 
 
-        console.log(`Executing query: SELECT * FROM users WHERE Email = ?`, [userEmail]);
-
-        const result = await db.query("SELECT * FROM users WHERE Email = ?", [userEmail]);
-
-        console.log("Database Query Result:", result); // ✅ Log the actual query result
+       var sql = 'SELECT * FROM `User` WHERE `Email` = ? '; 
+       var params = [userEmail]
+        //const result = await db.query("SELECT * FROM User WHERE Email = ?", [userEmail]);
+        var result = await db.query(sql,params)
+        console.log(result);
+        
+        //console.log("Database Query Result:", result); //  Log the actual query result
 
         if (result.length === 0) {
             return res.status(404).send("User not found");
         }
 
-        res.render("profile", { user: result[0] }); // ✅ Pass user data to Pug template
+        res.render("profile", { user: result[0] }); // Pass user data to Pug template
     } catch (error) {
-        console.error("Database Query Error:", error); // ✅ Log actual error
-        res.status(500).send(`Error retrieving user data: ${error.message}`); // ✅ Show real error
+        console.error("Database Query Error:", error); //  Log actual error
+        res.status(500).send(`Error retrieving user data: ${error.message}`); // Show real error
     }
 });
 
