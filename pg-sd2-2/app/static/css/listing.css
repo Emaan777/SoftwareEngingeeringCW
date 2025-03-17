@@ -1,0 +1,336 @@
+.page-title {
+    text-align: center;
+    margin: 2rem 0;
+    color: #333;
+}
+
+/* New color scheme */
+:root {
+    --primary-color: #7d9665;    /* Green/olive color */
+    --secondary-color: #ffffff;  /* White background */
+    --accent-color: #c08c5a;     /* Tan/brownish color */
+    --text-dark: #333333;
+    --text-medium: #666666;
+    --text-light: #999999;
+}
+
+/* Tab navigation */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+}
+
+.tab-btn {
+    background: var(--secondary-color);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    margin: 0 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    background: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+.tab-btn:hover:not(.active) {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.search-section {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+#search-input, #filter-select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#search-input {
+    width: 300px;
+}
+
+/* List View Styles */
+.users-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.user-list-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    background: var(--secondary-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.user-list-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.user-list-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.user-list-middle {
+    flex: 1;
+}
+
+.user-list-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    min-width: 120px;
+}
+
+.activity-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.activity-icon.running {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.activity-icon.cycling {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.user-image {
+    width: 50px;
+    height: 50px;
+}
+
+.user-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.user-basic-info h3 {
+    margin: 0 0 0.3rem;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+}
+
+.location-row, .time-row, .request-status {
+    display: flex;
+    margin: 0.3rem 0;
+    color: var(--text-medium);
+    font-size: 0.9rem;
+}
+
+.request-status {
+    flex-direction: column;
+}
+
+.status-text {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.request-date {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.exercise-preference {
+    margin: 0.3rem 0;
+    color: var(--text-medium);
+    font-size: 0.9rem;
+}
+
+.location i, .preferred-time i, .last-active i, .status-text i {
+    margin-right: 0.5rem;
+}
+
+.location i {
+    color: var(--accent-color);
+}
+
+.preferred-time i {
+    color: var(--primary-color);
+}
+
+.status-text i {
+    color: var(--accent-color);
+}
+
+.last-active i {
+    color: var(--primary-color);
+    font-size: 0.5rem;
+    margin-right: 0.3rem;
+}
+
+.last-active {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-align: right;
+}
+
+.send-request-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.send-request-btn:hover {
+    background-color: #8fa876; /* Lighter green */
+}
+
+.send-request-btn.sent {
+    background-color: var(--text-light);
+    cursor: default;
+}
+
+.cancel-request-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.cancel-request-btn:hover {
+    background-color: #d2a06e; /* Lighter tan */
+}
+
+.pending-item {
+    border-left: 4px solid var(--accent-color);
+}
+
+.no-users {
+    text-align: center;
+    color: var(--text-medium);
+    padding: 2rem;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    border-top: 5px solid var(--primary-color);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    text-align: center;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--text-light);
+}
+
+.close-modal:hover {
+    color: var(--text-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .user-list-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .user-list-middle, .user-list-right {
+        width: 100%;
+    }
+    
+    .user-list-right {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .tabs {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .tab-btn {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 4px;
+    }
+} 

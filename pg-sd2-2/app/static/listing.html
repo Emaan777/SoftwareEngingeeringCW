@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sport Buddy - Find Your Exercise Partner</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/listing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/listing">User Listings</a>
+        <a href="/profile">Profile</a>
+    </nav>
+
+    <div class="container">
+        <div class="tabs">
+            <button id="available-tab" class="tab-btn active">Available Partners</button>
+            <button id="pending-tab" class="tab-btn">Pending Requests</button>
+        </div>
+        
+        <div id="available-section" class="tab-content active">
+            <h1 class="page-title">Available Exercise Partners</h1>
+            
+            <div class="search-section">
+                <input id="search-input" type="text" placeholder="Search users or locations...">
+                <select id="filter-select">
+                    <option value="all">All Activities</option>
+                    <option value="Running">Running</option>
+                    <option value="Cycling">Cycling</option>
+                </select>
+            </div>
+
+            <div id="users-list" class="users-list">
+                <!-- User list items will be dynamically inserted here -->
+            </div>
+        </div>
+        
+        <div id="pending-section" class="tab-content">
+            <h1 class="page-title">Pending Requests</h1>
+            <div id="pending-list" class="users-list">
+                <!-- Pending requests will be dynamically inserted here -->
+            </div>
+            <p id="no-pending" class="no-users">You don't have any pending requests yet.</p>
+        </div>
+
+        <template id="user-list-item-template">
+            <div class="user-list-item">
+                <div class="user-list-left">
+                    <div class="activity-icon">
+                        <i></i>
+                    </div>
+                    <div class="user-image">
+                        <div class="placeholder-image">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="user-basic-info">
+                        <h3></h3>
+                        <p class="exercise-preference">
+                            <strong>Activity: </strong>
+                            <span></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="user-list-middle">
+                    <div class="location-row">
+                        <p class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span></span>
+                        </p>
+                    </div>
+                    <div class="time-row">
+                        <p class="preferred-time">
+                            <i class="far fa-clock"></i>
+                            <span></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="user-list-right">
+                    <p class="last-active">
+                        <i class="fas fa-circle"></i>
+                        <span></span>
+                    </p>
+                    <button class="send-request-btn">Send Request</button>
+                </div>
+            </div>
+        </template>
+        
+        <template id="pending-list-item-template">
+            <div class="user-list-item pending-item">
+                <div class="user-list-left">
+                    <div class="activity-icon">
+                        <i></i>
+                    </div>
+                    <div class="user-image">
+                        <div class="placeholder-image">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="user-basic-info">
+                        <h3></h3>
+                        <p class="exercise-preference">
+                            <strong>Activity: </strong>
+                            <span></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="user-list-middle">
+                    <div class="location-row">
+                        <p class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span></span>
+                        </p>
+                    </div>
+                    <div class="request-status">
+                        <p class="status-text">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>Request pending</span>
+                        </p>
+                        <p class="request-date">
+                            <span></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="user-list-right">
+                    <button class="cancel-request-btn">Cancel Request</button>
+                </div>
+            </div>
+        </template>
+        
+        <!-- Request Sent Modal -->
+        <div id="request-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <p>Request sent successfully!</p>
+                <p>The user will be notified of your interest to exercise together.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/listing.js"></script>
+</body>
+</html> 
