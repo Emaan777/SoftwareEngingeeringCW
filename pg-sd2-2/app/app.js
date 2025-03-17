@@ -1,9 +1,15 @@
 // Import express.js
 const express = require("express");
 const path = require("path");
+// Temporarily comment out the DB connection to prevent errors
+// const db = require("./db");
 
 // Create express app
 var app = express();
+
+// Set up Pug as the view engine
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
 // Add static files location
 app.use(express.static(path.join(__dirname, "static")));
@@ -95,28 +101,23 @@ app.get("/api/users", function (req, res) {
 // Profile route
 app.get("/profile/:email", function (req, res) {
     res.sendFile(path.join(__dirname, "static", "profile.html"));
+});
+
 //  UPDATED PROFILE ROUTE (NO SESSION, JUST STATIC EMAIL FOR TESTING)
-app.get("/profile", async function (req, res) {
-    try {
-        const userEmail = "john.smith@gmail.com"; 
+app.get("/profile", function (req, res) {
+    // Use hardcoded sample data since we're having database connection issues
+    const sampleUser = {
+        FirstName: "John",
+        LastName: "Smith",
+        Email: "john.smith@gmail.com",
+        ExercisePreference: "Running",
+        Expertise: "Beginner",
+        DateOfBirth: "1990-05-15",
+        Location: "Edinburgh City Center",
+        PreferredTime: "Morning (6-8 AM)"
+    };
 
-       var sql = 'SELECT * FROM `User` WHERE `Email` = ? '; 
-       var params = [userEmail]
-        //const result = await db.query("SELECT * FROM User WHERE Email = ?", [userEmail]);
-        var result = await db.query(sql,params)
-        console.log(result);
-        
-        //console.log("Database Query Result:", result); //  Log the actual query result
-
-        if (result.length === 0) {
-            return res.status(404).send("User not found");
-        }
-
-        res.render("profile", { user: result[0] }); // Pass user data to Pug template
-    } catch (error) {
-        console.error("Database Query Error:", error); //  Log actual error
-        res.status(500).send(`Error retrieving user data: ${error.message}`); // Show real error
-    }
+    res.render("profile", { user: sampleUser });
 });
 
 // Start server on port 3001, explicitly listening on all interfaces
