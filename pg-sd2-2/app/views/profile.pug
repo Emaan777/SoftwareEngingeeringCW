@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  h1 Profile Page
+  
+  // User Information Section
+  .user-info
+    .row
+      .col
+        h3 User Details
+        p
+          strong First Name: 
+          span= user.FirstName
+        p
+          strong Last Name: 
+          span= user.LastName
+        p
+          strong Date of Birth: 
+          span= user.DateOfBirth
+        p
+          strong Email: 
+          span= user.Email
+        p
+          strong Password: 
+          span= '**********' // Password is hidden for security reasons
+        p
+          strong Exercise Preference: 
+          span= user.ExercisePreference
+        p
+          strong Expertise: 
+          span= user.Expertise
+
+  // Bio Section
+  .bio
+    h3 Your Bio
+    p#user-bio= user.Bio || "No bio yet. Add one!"
+    textarea#bio-input(style="display: none;") #{user.Bio}  // Hidden input field
+    button#edit-bio-btn Edit Bio
+    button#save-bio-btn(style="display: none;") Save Bio  // Hidden save button
+
+  // Load external JavaScript file
+  script(src="/static/js/bio.js")
