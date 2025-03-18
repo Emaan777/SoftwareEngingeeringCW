@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #4CAF50, #FF9800);
+    padding: 20px;
+}
+
+.container {
+    max-width: 700px;
+    width: 100%;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+}
+
+.container .title {
+    font-size: 32px;
+    font-weight: 600;
+    position: relative;
+    color: #4CAF50;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.container .title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 60px;
+    background: #FF9800;
+}
+
+.form-content form .user-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+form .user-details .input-box {
+    width: calc(50% - 20px);
+    margin-bottom: 15px;
+}
+
+.user-details .input-box .details {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.user-details .input-box input,
+.user-details .input-box select {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.user-details .input-box input:focus,
+.user-details .input-box select:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.terms-container {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    height: 150px;
+    overflow-y: auto;
+    background: #f9f9f9;
+}
+
+.terms-container h4 {
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.terms-container p {
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.checkbox-container {
+    margin: 20px 0;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.button {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.button input {
+    padding: 12px 50px;
+    background: linear-gradient(135deg, #4CAF50, #FF9800);
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button input:hover {
+    background: linear-gradient(-135deg, #4CAF50, #FF9800);
+    transform: scale(1.02);
+}
+
+@media (max-width: 584px) {
+    .container {
+        max-width: 100%;
+    }
+    form .user-details .input-box {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+}
+
+.strength-meter,
+.match-indicator {
+    display: block;
+    font-size: 12px;
+    margin-top: 5px;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.strength-meter.weak {
+    color: #ff4444;
+}
+
+.strength-meter.medium {
+    color: #ffbb33;
+}
+
+.strength-meter.strong {
+    color: #00C851;
+}
+
+.match-indicator.match {
+    color: #00C851;
+}
+
+.match-indicator.no-match {
+    color: #ff4444;
+} 
