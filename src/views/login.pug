@@ -1,0 +1,131 @@
+extends layout
+
+block content
+  div.container
+    h1 Welcome Back to Sport Buddy
+    h2 Login to Your Account
+    
+    if loginError
+      div.alert.alert-danger
+        | Invalid email or password. Please try again.
+    
+    div.login-container
+      h3 Login to Find Your Exercise Partner
+      p Access your account to connect with exercise partners
+      
+      form(action="/login", method="post")
+        div.form-group
+          label(for="email") Email
+          input#email.form-control(type="email", name="email", required)
+        
+        div.form-group
+          label(for="password") Password
+          input#password.form-control(type="password", name="password", required)
+        
+        button.btn.btn-primary(type="submit") Login Now
+        
+      div.register-link
+        p Don't have an account? 
+          a(href="/register") Register here
+
+  style.
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+    
+    h1 {
+      color: #7d9665;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    
+    h2 {
+      color: #666;
+      text-align: center;
+      font-size: 1.3em;
+      margin-bottom: 30px;
+    }
+    
+    .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 12px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .login-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 30px;
+    }
+    
+    h3 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      color: #666;
+      margin-bottom: 25px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: 500;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    
+    .btn-primary {
+      background-color: #7d9665;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .btn-primary:hover {
+      background-color: #6a8254;
+    }
+    
+    .register-link {
+      text-align: center;
+      margin-top: 10px;
+    }
+    
+    .register-link a {
+      color: #7d9665;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .register-link a:hover {
+      text-decoration: underline;
+    } 

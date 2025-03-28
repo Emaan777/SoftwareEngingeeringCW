@@ -1,0 +1,97 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Sport Buddy - Find Your Exercise Partner
+    link(href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap", rel="stylesheet")
+    link(rel="stylesheet", href="/css/styles.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css")
+    style.
+      body {
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background: #f5f5f5;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem;
+      }
+      nav {
+        background: #7d9665;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin-right: 1rem;
+        font-weight: 500;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      .auth-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+      .btn-login, .btn-logout, .btn-register {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      .btn-login, .btn-register {
+        background-color: white;
+        color: #7d9665;
+        border: none;
+      }
+      .btn-logout {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid white;
+      }
+      .btn-login:hover, .btn-register:hover {
+        background-color: #f0f0f0;
+      }
+      .btn-logout:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+      .user-info {
+        color: white;
+        margin-right: 1rem;
+      }
+    block styles
+  body
+    nav
+      div.nav-links
+        a(href="/") Home
+        a(href="/listing.html") User Listings
+        a(href="/profile") Profile
+      
+      div.auth-buttons
+        if session && session.isLoggedIn
+          span.user-info 
+            i.fas.fa-user
+            | Welcome, #{session.userName || 'User'}
+          a.btn-logout(href="/logout") Logout
+        else
+          a.btn-login(href="/login") Login
+          a.btn-register(href="/register") Register
+        
+    .container
+      block content
+    
+    script(src="/js/listing.js")
+    block scripts

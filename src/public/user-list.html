@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Buddy - Activity List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --secondary-color: #2ecc71;
+            --secondary-dark: #27ae60;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --text-color: #2c3e50;
+            --running-color: #2ecc71;
+            --cycling-color: #e67e22;
+            --gray-light: #f8f9fa;
+            --gray-medium: #e9ecef;
+            --gray-dark: #6c757d;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--gray-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark));
+            color: white;
+            text-align: center;
+            padding: 2rem 0 3rem;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 50px;
+            margin: -1.5rem auto 2rem;
+            max-width: 500px;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            z-index: 10;
+        }
+
+        nav a {
+            color: var(--dark-color);
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            margin: 0 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+
+        .page-title:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        .filter-section {
+            background-color: var(--light-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .filter-section input, .filter-section select {
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--gray-medium);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            min-width: 200px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .filter-section input:focus, .filter-section select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+        }
+
+        #apply-filter {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 2rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #apply-filter:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin: 2rem 0 1.5rem;
+            font-weight: 600;
+            position: relative;
+            padding-left: 1rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .activities-container {
+            margin-top: 2rem;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .activity-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-medium);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-medium);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .activity-tag {
+            display: inline-block;
+            padding: 0.35rem 1rem;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .activity-tag.running {
+            background: linear-gradient(to right, var(--running-color), #27ae60);
+        }
+
+        .activity-tag.cycling {
+            background: linear-gradient(to right, var(--cycling-color), #d35400);
+        }
+
+        .card-body {
+            padding: 1.2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-info h3 {
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--dark-color);
+        }
+
+        .location {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
+        .location::before {
+            content: "📍";
+            margin-right: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .time {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.2rem;
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
+        .time::before {
+            content: "🕒";
+            margin-right: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .card-actions {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .save-button {
+            padding: 0.7rem 1rem;
+            background: white;
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .save-button:hover {
+            background: #e6f7ef;
+        }
+
+        .save-button.saved {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .view-profile {
+            padding: 0.7rem 1rem;
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .view-profile:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+        }
+
+        .no-users {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--gray-dark);
+            font-size: 1.1rem;
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 768px) {
+            .filter-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #search-input, #activity-select, #apply-filter {
+                width: 100%;
+            }
+
+            .card-actions {
+                flex-direction: column;
+            }
+
+            .save-button, .view-profile {
+                width: 100%;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sport Buddy</h1>
+            <p>Find the perfect exercise partner in your area</p>
+        </header>
+        
+        <nav>
+            <a href="/">Home</a>
+            <a href="/user-list" class="active">Activity List</a>
+            <a href="/profile">Profile</a>
+        </nav>
+        
+        <main>
+            <h1 class="page-title">User Activity List</h1>
+            
+            <div class="filter-section">
+                <input id="search-input" type="text" placeholder="Search users...">
+                <select id="activity-select">
+                    <option value="all">All Activities</option>
+                    <option value="Running">Running</option>
+                    <option value="Cycling">Cycling</option>
+                </select>
+                <button id="apply-filter">Apply Filters</button>
+            </div>
+
+            <div class="activities-container">
+                <h2 class="section-title">Running Activities</h2>
+                <div class="activities-grid" id="running-activities">
+                    <!-- Running activities will be populated by JavaScript -->
+                    <p class="no-users">Loading running activities...</p>
+                </div>
+
+                <h2 class="section-title">Cycling Activities</h2>
+                <div class="activities-grid" id="cycling-activities">
+                    <!-- Cycling activities will be populated by JavaScript -->
+                    <p class="no-users">Loading cycling activities...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        console.log('HTML page loaded');
+    </script>
+    <script src="js/user-list.js"></script>
+</body>
+</html> 

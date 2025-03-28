@@ -1,0 +1,53 @@
+doctype html
+html(lang="en")
+  head
+    title User Profile
+    link(rel="stylesheet", href="/css/styles.css")
+  body
+    .profile-container
+      h1 User Profile
+      #profile-content
+        .loading Loading profile data...
+      #error-message.error-message(style="display: none;")
+        p An error occurred while loading your profile. Please try again later.
+
+    script.
+      document.addEventListener('DOMContentLoaded', async function() {
+        try {
+          const response = await fetch('/api/profile');
+          if (!response.ok) {
+            throw new Error('Failed to fetch profile data');
+          }
+          const user = await response.json();
+          
+          const profileContent = document.getElementById('profile-content');
+          profileContent.innerHTML = `
+            <div class="profile-info">
+              <p>
+                <strong>Name: </strong>
+                ${user.FirstName} ${user.LastName}
+              </p>
+              <p>
+                <strong>Email: </strong>
+                ${user.Email}
+              </p>
+              <p>
+                <strong>Exercise Preference: </strong>
+                ${user.ExercisePreference}
+              </p>
+              <p>
+                <strong>Expertise Level: </strong>
+                ${user.Expertise}
+              </p>
+              <p>
+                <strong>Date of Birth: </strong>
+                ${new Date(user.DateOfBirth).toLocaleDateString()}
+              </p>
+            </div>
+          `;
+        } catch (error) {
+          console.error('Error loading profile:', error);
+          document.getElementById('error-message').style.display = 'block';
+          document.getElementById('profile-content').innerHTML = '';
+        }
+      });

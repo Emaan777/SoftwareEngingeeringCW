@@ -1,0 +1,210 @@
+extends layout
+
+block content
+  section.hero-section
+    div.hero-content
+      h1 Find Your Perfect Exercise Partner
+      p Connect with like-minded fitness enthusiasts in your area. Whether you're a runner, cyclist, or just starting your fitness journey, Sport Buddy helps you find the perfect partner to achieve your goals together.
+      .cta-buttons
+        a.cta-button.primary(href="/listing.html") Find Partners
+        a.cta-button.secondary(href="/user-list") View Activities
+
+  section.features-section
+    h2 Why Choose Sport Buddy?
+    .features-grid
+      .feature-card
+        i.fas.fa-users
+        h3 Find Local Partners
+        p Connect with exercise partners in your area who share your fitness goals and schedule.
+      .feature-card
+        i.fas.fa-clock
+        h3 Flexible Scheduling
+        p Find partners who match your preferred exercise times, whether it's early morning runs or evening cycling sessions.
+      .feature-card
+        i.fas.fa-map-marker-alt
+        h3 Location-Based
+        p Meet up with partners at convenient locations near you.
+
+  section.how-it-works
+    h2 How Sport Buddy Works
+    .steps-container
+      .step
+        .step-number 1
+        .step-content
+          h3 Create Your Profile
+          p Sign up and tell us about your exercise preferences, skill level, and schedule.
+      .step
+        .step-number 2
+        .step-content
+          h3 Find Partners
+          p Browse through potential exercise partners based on your preferences.
+      .step
+        .step-number 3
+        .step-content
+          h3 Connect & Exercise
+          p Send partner requests, schedule workouts, and achieve your fitness goals together.
+
+block styles
+  style.
+    .hero-section {
+      background: linear-gradient(135deg, #7d9665, #5a7047);
+      padding: 5rem 2rem;
+      color: white;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 3rem;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hero-section h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    
+    .hero-section p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .cta-button.primary {
+      background-color: white;
+      color: #7d9665;
+    }
+    
+    .cta-button.secondary {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    
+    .cta-button.primary:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .cta-button.secondary:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .features-section, .how-it-works {
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+    
+    .features-section h2, .how-it-works h2 {
+      font-size: 2.2rem;
+      margin-bottom: 3rem;
+      color: #333;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .feature-card {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .feature-card i {
+      font-size: 2.5rem;
+      color: #7d9665;
+      margin-bottom: 1rem;
+    }
+    
+    .feature-card h3 {
+      margin: 1rem 0;
+      font-size: 1.4rem;
+      color: #333;
+    }
+    
+    .feature-card p {
+      color: #666;
+    }
+    
+    .steps-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .step {
+      display: flex;
+      align-items: flex-start;
+      max-width: 350px;
+      text-align: left;
+    }
+    
+    .step-number {
+      background-color: #7d9665;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .step-content h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+      color: #333;
+    }
+    
+    .step-content p {
+      color: #666;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 2.2rem;
+      }
+      
+      .features-grid, .steps-container {
+        gap: 1.5rem;
+      }
+      
+      .step {
+        width: 100%;
+      }
+    } 

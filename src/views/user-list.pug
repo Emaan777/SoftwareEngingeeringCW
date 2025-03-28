@@ -1,0 +1,61 @@
+extends layout
+
+block content
+  link(rel="stylesheet", href="/css/user-list.css")
+  h1.page-title User Activity List
+  
+  .filter-section
+    input#search-input(type="text" placeholder="Search users...")
+    select#activity-select
+      option(value="all") All Activities
+      option(value="Running") Running
+      option(value="Cycling") Cycling
+    button#apply-filter Apply Filters
+
+  .activities-container
+    h2.section-title Running Activities
+    .activities-grid#running-activities
+      if users && users.length > 0
+        each user in users.filter(user => user.ExercisePreference === 'Running')
+          .activity-card
+            .user-info
+              h3 #{user.FirstName} #{user.LastName}
+              p.location
+                strong Location: 
+                span #{user.Location}
+            .activity-info
+              span.activity-tag.running Running
+              if user.PreferredTime
+                p.time 
+                  strong Time: 
+                  span #{user.PreferredTime}
+            .card-actions
+              button.save-button(data-email=user.Email) Save for Later
+              a.view-profile(href=`/profile/${user.Email}`) View Profile
+      else
+        p.no-users No running activities found.
+
+    h2.section-title Cycling Activities
+    .activities-grid#cycling-activities
+      if users && users.length > 0
+        each user in users.filter(user => user.ExercisePreference === 'Cycling')
+          .activity-card
+            .user-info
+              h3 #{user.FirstName} #{user.LastName}
+              p.location
+                strong Location: 
+                span #{user.Location}
+            .activity-info
+              span.activity-tag.cycling Cycling
+              if user.PreferredTime
+                p.time 
+                  strong Time: 
+                  span #{user.PreferredTime}
+            .card-actions
+              button.save-button(data-email=user.Email) Save for Later
+              a.view-profile(href=`/profile/${user.Email}`) View Profile
+      else
+        p.no-users No cycling activities found.
+
+block scripts
+  script(src="/js/user-list.js") 

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Buddy - Find Your Exercise Partner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --secondary-color: #2ecc71;
+            --secondary-dark: #27ae60;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --text-color: #2c3e50;
+            --running-color: #2ecc71;
+            --cycling-color: #e67e22;
+            --gray-light: #f8f9fa;
+            --gray-medium: #e9ecef;
+            --gray-dark: #6c757d;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--gray-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            text-align: center;
+            padding: 2rem 0 3rem;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 50px;
+            margin: -1.5rem auto 2rem;
+            max-width: 500px;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            z-index: 10;
+        }
+
+        nav a {
+            color: var(--dark-color);
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            margin: 0 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        main {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .search-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .search-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            text-align: center;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .search-section h2:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+
+        .search-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .filter {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        #search-input, #filter-select {
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--gray-medium);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            min-width: 200px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        #search-input:focus, #filter-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        #search-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 2rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        #search-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--gray-medium);
+            padding-bottom: 1px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            color: var(--gray-dark);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+        }
+
+        .tab-btn.active:after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .users-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .user-list-item {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-medium);
+        }
+
+        .user-list-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-list-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .activity-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .activity-icon.running {
+            background-color: var(--running-color);
+        }
+
+        .activity-icon.cycling {
+            background-color: var(--cycling-color);
+        }
+
+        .user-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: var(--gray-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .placeholder-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+            background-color: var(--gray-medium);
+        }
+
+        .user-basic-info h3 {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: var(--dark-color);
+        }
+
+        .exercise-preference {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
+        .user-list-middle {
+            flex: 1;
+            min-width: 200px;
+            padding: 0 1rem;
+        }
+
+        .location-row, .time-row {
+            display: flex;
+            margin-bottom: 0.8rem;
+            align-items: center;
+        }
+
+        .location, .preferred-time {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .last-active {
+            font-size: 0.8rem;
+            color: var(--gray-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .fa-circle {
+            font-size: 0.5rem;
+            color: #27ae60;
+        }
+
+        .user-list-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            min-width: 150px;
+        }
+
+        .send-request-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-request-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .send-request-btn.sent {
+            background-color: var(--gray-medium);
+            color: var(--gray-dark);
+            cursor: not-allowed;
+        }
+
+        .cancel-request-btn {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-request-btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .no-users {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray-dark);
+            font-size: 1.1rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-dark);
+        }
+
+        .modal-content h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .search-filters {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            #search-button {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .user-list-item {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .user-list-left, .user-list-middle, .user-list-right {
+                width: 100%;
+                align-items: flex-start;
+            }
+
+            .user-list-right {
+                align-items: center;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sport Buddy</h1>
+            <p>Find the perfect exercise partner in your area</p>
+        </header>
+        
+        <nav>
+            <a href="/" class="active">Home</a>
+            <a href="/user-list">Activity List</a>
+            <a href="/profile">Profile</a>
+        </nav>
+        
+        <main>
+            <section class="search-section">
+                <h2>Find Exercise Partners</h2>
+                <div class="search-filters">
+                    <div class="filter">
+                        <label for="search-input">Search:</label>
+                        <input type="text" id="search-input" placeholder="Name, location...">
+                    </div>
+                    
+                    <div class="filter">
+                        <label for="filter-select">Activity:</label>
+                        <select id="filter-select">
+                            <option value="all">All Activities</option>
+                            <option value="Running">Running</option>
+                            <option value="Cycling">Cycling</option>
+                        </select>
+                    </div>
+                    
+                    <button id="search-button">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </section>
+            
+            <div class="tabs">
+                <button id="available-tab" class="tab-btn active">Available Partners</button>
+                <button id="pending-tab" class="tab-btn">Pending Requests</button>
+            </div>
+            
+            <div id="available-section" class="tab-content active">
+                <div id="users-list" class="users-list">
+                    <!-- User list items will be loaded here dynamically -->
+                    <p class="no-users">Loading users...</p>
+                </div>
+            </div>
+            
+            <div id="pending-section" class="tab-content">
+                <div id="pending-list" class="users-list">
+                    <!-- Pending requests will be loaded here dynamically -->
+                </div>
+                <p id="no-pending" class="no-users">You don't have any pending requests.</p>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal for request confirmation -->
+    <div id="request-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Request Sent!</h3>
+            <p>Your request has been sent. You'll be notified when they respond.</p>
+        </div>
+    </div>
+    
+    <!-- Templates -->
+    <template id="user-list-item-template">
+        <div class="user-list-item">
+            <div class="user-list-left">
+                <div class="activity-icon">
+                    <i></i>
+                </div>
+                <div class="user-image">
+                    <div class="placeholder-image">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="user-basic-info">
+                    <h3></h3>
+                    <p class="exercise-preference">Activity: <span></span></p>
+                </div>
+            </div>
+            <div class="user-list-middle">
+                <div class="location-row">
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> <span></span></div>
+                </div>
+                <div class="time-row">
+                    <div class="preferred-time"><i class="far fa-clock"></i> <span></span></div>
+                </div>
+            </div>
+            <div class="user-list-right">
+                <div class="last-active"><i class="fas fa-circle"></i> <span></span></div>
+                <button class="send-request-btn">Send Request</button>
+            </div>
+        </div>
+    </template>
+    
+    <template id="pending-list-item-template">
+        <div class="user-list-item pending-item">
+            <div class="user-list-left">
+                <div class="activity-icon">
+                    <i></i>
+                </div>
+                <div class="user-image">
+                    <div class="placeholder-image">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="user-basic-info">
+                    <h3></h3>
+                    <p class="exercise-preference">Activity: <span></span></p>
+                </div>
+            </div>
+            <div class="user-list-middle">
+                <div class="location-row">
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> <span></span></div>
+                </div>
+                <div class="request-status">
+                    <div class="status-text"><i class="fas fa-hourglass-half"></i> Pending</div>
+                    <div class="request-date">Sent: <span></span></div>
+                </div>
+            </div>
+            <div class="user-list-right">
+                <button class="cancel-request-btn">Cancel Request</button>
+            </div>
+        </div>
+    </template>
+    
+    <!-- Include the external JavaScript file -->
+    <script src="js/listing.js"></script>
+</body>
+</html> 

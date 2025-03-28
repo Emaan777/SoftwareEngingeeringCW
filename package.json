@@ -1,0 +1,32 @@
+{
+  "name": "sport-buddy",
+  "version": "1.0.0",
+  "description": "Sport Buddy Application - Find workout partners",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "supervisor -e js,pug,html src/index.js",
+    "test": "jest",
+    "lint": "eslint src/",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:restart": "docker-compose down && docker-compose up -d",
+    "docker:logs": "docker-compose logs -f",
+    "docker:clean": "docker-compose down -v --remove-orphans"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-session": "^1.18.0",
+    "mysql2": "^3.6.5",
+    "pug": "^3.0.2",
+    "supervisor": "^0.12.0",
+    "path": "^0.12.7"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
