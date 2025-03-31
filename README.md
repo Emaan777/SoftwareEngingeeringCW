@@ -91,12 +91,6 @@ For local development:
 - `npm run docker:up` - Start Docker containers
 - `npm run docker:down` - Stop Docker containers
 
-## 🔒 Security Notes
-
-- In production, use secure and random session secrets and database passwords
-- Update MySQL credentials in the .env file
-- Consider using a reverse proxy with SSL in production
-- The application uses hashed passwords for user authentication
 
 ## 💾 Database
 
