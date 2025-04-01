@@ -13,7 +13,7 @@ const app = require("./app.js");
 const http = require('http');
 
 // Get port from environment
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 
 // Create HTTP server
 const server = http.createServer(app);

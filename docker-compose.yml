@@ -24,7 +24,7 @@ services:
       - ./src/views:/app/src/views
     command: npm run dev
     ports:
-      - "8000:8000"
+      - "3000:3000"
     depends_on:
       db:
         condition: service_healthy
@@ -34,13 +34,13 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE:-Sport_Buddy}
       - MYSQL_USER=${MYSQL_USER:-admin}
       - MYSQL_PASS=${MYSQL_PASS:-password}
-      - PORT=8000
+      - PORT=3000
       - SESSION_SECRET=${SESSION_SECRET:-sport-buddy-secret-key}
     networks:
       - app-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:8000/api/debug"]
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/debug"]
       interval: 10s
       timeout: 5s
       retries: 3

@@ -6,6 +6,9 @@ const express = require("express");
 const path = require("path");
 const session = require("express-session");
 
+// Import database connection
+const db = require('./models/db');
+
 // Import routes
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
