@@ -3,6 +3,9 @@ const express = require("express");
 
 // Create express app
 var app = express();
+app.set('view engine', 'pug');
+app.set('views', './app/views');
+
 
 // Add static files location
 app.use(express.static("static"));
@@ -18,7 +21,7 @@ app.get("/", function(req, res) {
 // Create a route for testing the db
 app.get("/db_test", function(req, res) {
     // Assumes a table called test_table exists in your database
-    sql = 'select * from test_table';
+    sql = 'select * from User';
     db.query(sql).then(results => {
         console.log(results);
         res.send(results)
@@ -40,6 +43,16 @@ app.get("/hello/:name", function(req, res) {
     console.log(req.params);
     //  Retrieve the 'name' parameter and use it in a dynamically generated page
     res.send("Hello " + req.params.name);
+});
+
+app.get("/userlist", function(req, res) {
+    var sql = 'select * from User';
+    db.query(sql).then(results => 
+        { console.log(results)
+    	    // Send the results rows to the all-students template
+    	    // The rows will be in a variable called data
+        res.render('userlist', {data: results});
+    });
 });
 
 // Start server on port 3000
