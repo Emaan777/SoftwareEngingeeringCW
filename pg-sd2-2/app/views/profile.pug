@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    - console.log(user)
+    .main-content 
+        h1 User Profile
+        table(border=1)
+            tr  
+                td User ID
+                td #{user.UserID}
+            tr  
+                td First Name
+                td #{user.FirstName}
+            tr  
+                td Last Name
+                td #{user.LastName}
+            tr  
+                td Email
+                td #{user.Email}
+            tr  
+                td Date of Birth
+                td #{user.DateOfBirth}
+            tr  
+                td Exercise Preference
+                td #{user.ExercisePreference}
+            tr  
+                td Expertise
+                td #{user.Expertise}

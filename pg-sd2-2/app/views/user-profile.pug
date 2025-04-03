@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  .main-content(style="padding: 20px;")
+    h1(style="color: #333;") User Profile
+    if user
+      table(border=1, style="width: 100%; border-collapse: collapse; margin-bottom: 20px;")
+        tr(style="background-color: #f2f2f2;")
+          th(style="padding: 10px; text-align: left;") Field
+          th(style="padding: 10px; text-align: left;") Value
+        tr
+          td(style="padding: 10px; font-weight: bold;") User ID
+          td(style="padding: 10px;") #{user.UserID}
+        tr
+          td(style="padding: 10px; font-weight: bold;") Email
+          td(style="padding: 10px;") #{user.Email}
+        tr
+          td(style="padding: 10px; font-weight: bold;") Name
+          td(style="padding: 10px;") #{user.FirstName} #{user.LastName}
+        tr
+          td(style="padding: 10px; font-weight: bold;") Date of Birth
+          td(style="padding: 10px;") #{user.DateOfBirth ? new Date(user.DateOfBirth).toLocaleDateString() : 'N/A'}
+        tr
+          td(style="padding: 10px; font-weight: bold;") Exercise Preference
+          td(style="padding: 10px;") #{user.ExercisePreference || 'N/A'}
+        tr
+          td(style="padding: 10px; font-weight: bold;") Expertise
+          td(style="padding: 10px;") #{user.Expertise || 'N/A'}
+      
+      a(href="/userlist", style="display: inline-block; padding: 10px 15px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px;") Back to User List
+    else
+      p(style="color: red;") User not found 

@@ -2,10 +2,21 @@ extends layout
 block content
     - console.log(data)
     .main-content 
-    h1 All User 
-    table(border=1)
-        for item in data 
-            tr  
-                td #{item.Email}
-                td 
-                    a(href='/student-single/' + item.id) #{item.name}
+        h1 All Users 
+        table(border=1, style="width: 100%; border-collapse: collapse;")
+            tr(style="background-color: #f2f2f2;")
+                th(style="padding: 8px;") Email
+                th(style="padding: 8px;") Name
+                th(style="padding: 8px;") Exercise Preference
+                th(style="padding: 8px;") Action
+            if data && data.length > 0
+                for item in data 
+                    tr  
+                        td(style="padding: 8px;") #{item.Email}
+                        td(style="padding: 8px;") #{item.FirstName} #{item.LastName}
+                        td(style="padding: 8px;") #{item.ExercisePreference || 'N/A'}
+                        td(style="padding: 8px;") 
+                            a(href='/user-single/' + item.UserID, style="text-decoration: none; color: blue;") View Profile
+            else
+                tr
+                    td(colspan="4", style="text-align: center; padding: 8px;") No users found
