@@ -4,11 +4,11 @@ const mysql = require('mysql2/promise');
 
 const config = {
   db: {
-    host: '127.0.0.1',       // Use explicit IPv4 instead of localhost
-    port: 3308,              // Use the mapped port 3308
-    user: 'root',            // Use root user
-    password: 'password',    // Use the password from docker-compose
-    database: 'Sport_Buddy',  // Use the Sport_Buddy database instead of sd2
+    host: process.env.DB_CONTAINER || 'db',  // Use the Docker service name
+    port: process.env.DB_PORT || 3306,       // Use the internal Docker port
+    user: process.env.MYSQL_ROOT_USER || 'root',
+    password: process.env.MYSQL_ROOT_PASSWORD || 'password',
+    database: process.env.MYSQL_DATABASE || 'Sport_Buddy',
     waitForConnections: true,
     connectionLimit: 2,
     queueLimit: 0,

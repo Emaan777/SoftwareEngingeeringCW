@@ -2,7 +2,7 @@
 FROM node:18
 
 # set a working directory
-WORKDIR /src
+WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
@@ -15,5 +15,8 @@ COPY . .
 
 # Expose port
 EXPOSE 3000
+
+# Command to run the application
+CMD ["node", "index.js"]
 
 

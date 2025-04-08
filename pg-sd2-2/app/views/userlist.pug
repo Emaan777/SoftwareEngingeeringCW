@@ -1,22 +1,52 @@
 extends layout
+
 block content
-    - console.log(data)
-    .main-content 
-        h1 All Users 
-        table(border=1, style="width: 100%; border-collapse: collapse;")
-            tr(style="background-color: #f2f2f2;")
-                th(style="padding: 8px;") Email
-                th(style="padding: 8px;") Name
-                th(style="padding: 8px;") Exercise Preference
-                th(style="padding: 8px;") Action
-            if data && data.length > 0
-                for item in data 
-                    tr  
-                        td(style="padding: 8px;") #{item.Email}
-                        td(style="padding: 8px;") #{item.FirstName} #{item.LastName}
-                        td(style="padding: 8px;") #{item.ExercisePreference || 'N/A'}
-                        td(style="padding: 8px;") 
-                            a(href='/user-single/' + item.UserID, style="text-decoration: none; color: blue;") View Profile
-            else
-                tr
-                    td(colspan="4", style="text-align: center; padding: 8px;") No users found
+  style.
+    .user-list {
+      list-style: none;
+      padding: 0;
+    }
+    .user-card {
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .user-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    .user-name {
+      font-size: 1.2em;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    .user-details {
+      color: #666;
+      font-size: 0.9em;
+    }
+    .view-profile {
+      display: inline-block;
+      background: #4CAF50;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 4px;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+    .view-profile:hover {
+      background: #45a049;
+    }
+
+  h1 Sport Buddy Users
+  ul.user-list
+    each user in data
+      li.user-card
+        .user-name #{user.FirstName} #{user.LastName}
+        .user-details
+          p Email: #{user.Email}
+          p Exercise Preference: #{user.ExercisePreference}
+          p Expertise Level: #{user.Expertise}
+        a.view-profile(href=`/user-single/${user.UserID}`) View Profile
