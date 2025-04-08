@@ -2,8 +2,8 @@
 SET time_zone = '+00:00';
 
 -- Use correct database
-CREATE DATABASE IF NOT EXISTS Sport_Buddy;
-USE Sport_Buddy;
+CREATE DATABASE IF NOT EXISTS sd2;
+USE sd2;
 
 -- ------------------------------------------
 -- Creating `User` Table

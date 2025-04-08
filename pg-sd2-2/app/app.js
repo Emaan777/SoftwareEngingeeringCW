@@ -1,14 +1,26 @@
 // Import express.js
 const express = require("express");
+const path = require('path');
+const fs = require('fs').promises;
 
 // Create express app
 var app = express();
 app.set('view engine', 'pug');
 app.set('views', './app/views');
 
-
 // Add static files location
 app.use(express.static("static"));
+
+// Serve CSS files dynamically
+app.get('/styles/:name.css', async (req, res) => {
+    const cssPath = path.join(__dirname, 'styles', `${req.params.name}.css`);
+    try {
+        const css = await fs.readFile(cssPath, 'utf8');
+        res.type('text/css').send(css);
+    } catch (err) {
+        res.status(404).send('Style not found');
+    }
+});
 
 // Get the functions in the db.js file to use
 const db = require('./services/db');
@@ -23,11 +35,13 @@ app.get("/", function(req, res) {
 
 // Create a route for testing the db
 app.get("/db_test", function(req, res) {
-    // Assumes a table called test_table exists in your database
     sql = 'select * from User';
     db.query(sql).then(results => {
-        console.log(results);
+        console.log('DB Test Results:', results);
         res.send(results)
+    }).catch(err => {
+        console.error('DB Test Error:', err);
+        res.status(500).send('Database error: ' + err.message);
     });
 });
 
@@ -48,14 +62,24 @@ app.get("/hello/:name", function(req, res) {
     res.send("Hello " + req.params.name);
 });
 
-app.get("/userlist", function(req, res) {
-    var sql = 'select * from User';
-    db.query(sql).then(results => 
-        { console.log(results)
-    	    // Send the results rows to the userlist template
-    	    // The rows will be in a variable called data
-        res.render('userlist', {data: results});
-    });
+app.get("/userlist", async function(req, res) {
+    try {
+        console.log('Fetching users from database...');
+        const sql = 'SELECT * FROM User';
+        const results = await db.query(sql);
+        console.log('Query results:', results);
+        
+        if (!results || results.length === 0) {
+            console.log('No users found in database');
+            return res.render('userlist', { data: [] });
+        }
+        
+        console.log(`Found ${results.length} users`);
+        res.render('userlist', { data: results });
+    } catch (err) {
+        console.error('Error in userlist route:', err);
+        res.status(500).send('Database error: ' + err.message);
+    }
 });
 
 // Add user profile route
@@ -74,6 +98,6 @@ app.get("/user-single/:id", function(req, res) {
 });
 
 // Start server on port 3000
-app.listen(3000,function(){
-    console.log(`Server running at http://127.0.0.1:3000/`);
+app.listen(3000, '0.0.0.0', function(){
+    console.log(`Server running at http://localhost:3000/`);
 });
