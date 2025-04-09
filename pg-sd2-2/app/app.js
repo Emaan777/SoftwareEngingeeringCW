@@ -2,14 +2,33 @@
 const express = require("express");
 const path = require('path');
 const fs = require('fs').promises;
+const bcrypt = require('bcrypt');  // Add this line for password hashing
+const session = require('express-session');
 
 // Create express app
 var app = express();
 app.set('view engine', 'pug');
 app.set('views', './app/views');
 
+// Add session middleware
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: false
+}));
+
+// Add middleware to pass user login status and current path to all views
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = !!req.session.userId;
+    res.locals.path = req.path;
+    next();
+});
+
 // Add static files location
-app.use(express.static("static"));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Add middleware to parse POST data
+app.use(express.urlencoded({ extended: true }));
 
 // Serve CSS files dynamically
 app.get('/styles/:name.css', async (req, res) => {
@@ -63,11 +82,15 @@ app.get("/hello/:name", function(req, res) {
 });
 
 app.get("/userlist", async function(req, res) {
+    // Check if user is logged in
+    if (!req.session?.userId) {
+        return res.redirect('/register');
+    }
+
     try {
         console.log('Fetching users from database...');
         const sql = 'SELECT * FROM User';
         const results = await db.query(sql);
-        console.log('Query results:', results);
         
         if (!results || results.length === 0) {
             console.log('No users found in database');
@@ -95,6 +118,88 @@ app.get("/user-single/:id", function(req, res) {
         console.error(err);
         res.status(500).send('Database error');
     });
+});
+
+// Show registration form
+app.get("/register", function(req, res) {
+    res.render('register');
+});
+
+// Handle registration form submission
+app.post("/register", async function(req, res) {
+    try {
+        // Check if terms were accepted
+        if (!req.body.terms) {
+            // In a real app, you'd want to show an error message
+            return res.redirect('/register');
+        }
+
+        // Get form data
+        const { userID, firstName, lastName, email, password, dob, exercise } = req.body;
+        
+        // Hash the password (simple version with 10 rounds)
+        const hashedPassword = await bcrypt.hash(password, 10);
+        
+        // Insert user with hashed password
+        const sql = `
+            INSERT INTO User (UserID, FirstName, LastName, Email, UserPasword, DateOfBirth, ExercisePreference)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        `;
+        
+        await db.query(sql, [userID, firstName, lastName, email, hashedPassword, dob, exercise]);
+        
+        // Set session
+        req.session.userId = userID;
+        
+        // Redirect to userlist page
+        res.redirect('/userlist');
+    } catch (err) {
+        console.error('Registration error:', err);
+        // In a real app, you'd want to show the error on the form
+        res.redirect('/register');
+    }
+});
+
+// Show login form
+app.get("/login", function(req, res) {
+    res.render('login');
+});
+
+// Handle login form submission
+app.post("/login", async function(req, res) {
+    try {
+        const { email, password } = req.body;
+        
+        // Find user by email
+        const sql = 'SELECT * FROM User WHERE Email = ?';
+        const results = await db.query(sql, [email]);
+        
+        if (results.length === 0) {
+            return res.redirect('/login');
+        }
+        
+        const user = results[0];
+        
+        // Check password
+        const match = await bcrypt.compare(password, user.UserPasword);
+        
+        if (match) {
+            // Set session
+            req.session.userId = user.UserID;
+            res.redirect('/userlist');
+        } else {
+            res.redirect('/login');
+        }
+    } catch (err) {
+        console.error('Login error:', err);
+        res.redirect('/login');
+    }
+});
+
+// Add logout route
+app.get("/logout", function(req, res) {
+    req.session.destroy();
+    res.redirect('/');
 });
 
 // Start server on port 3000

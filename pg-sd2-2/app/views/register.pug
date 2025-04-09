@@ -1,0 +1,55 @@
+extends layout
+
+block styles
+  link(rel='stylesheet', href='/styles/register.css')
+
+block content
+  .register-container
+    h1 Create Account
+    form.register-form(action="/register" method="POST")
+      .form-group
+        label(for="userID") User ID:
+        input#userID(type="text" name="userID" required)
+      
+      .form-group
+        label(for="firstName") First Name:
+        input#firstName(type="text" name="firstName" required)
+      
+      .form-group
+        label(for="lastName") Last Name:
+        input#lastName(type="text" name="lastName" required)
+      
+      .form-group
+        label(for="email") Email:
+        input#email(type="email" name="email" required)
+      
+      .form-group
+        label(for="password") Password:
+        input#password(type="password" name="password" required)
+      
+      .form-group
+        label(for="dob") Date of Birth:
+        input#dob(type="date" name="dob" required)
+      
+      .form-group
+        label(for="exercise") Exercise Preference:
+        select#exercise(name="exercise" required)
+          option(value="") Select preference...
+          option(value="Running") Running
+          option(value="Cycling") Cycling
+      
+      .terms-container
+        h2 Terms and Conditions:
+        .terms-text
+          p By using this app, you agree to connect with fellow runners and cyclists for mutual exercise and fitness activities. Users must be at least 18 years old and agree to follow all safety guidelines during interactions. You are responsible for your own health, safety, and well-being while participating in activities.
+          p The app disclaims liability for any accidents, injuries, or damages that may occur. Personal information shared within the app will be handled according to our privacy policy. By using the app, you consent to these terms and conditions.
+        
+        .terms-checkbox
+          input#terms(type="checkbox" name="terms" required)
+          label(for="terms") I agree to the Terms and Conditions
+      
+      button.submit-btn(type="submit") Create Account
+      
+      .login-link
+        p Already have an account? 
+          a(href="/login") Login here 

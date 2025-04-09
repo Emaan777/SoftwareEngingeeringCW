@@ -4,13 +4,21 @@ block styles
   link(rel='stylesheet', href='/styles/userlist.css')
 
 block content
-  h1 Sport Buddy Users
-  ul.user-list
-    each user in data
-      li.user-card
-        .user-name #{user.FirstName} #{user.LastName}
-        .user-details
-          p Email: #{user.Email}
-          p Exercise Preference: #{user.ExercisePreference}
-          p Expertise Level: #{user.Expertise}
-        a.view-profile(href=`/user-single/${user.UserID}`) View Profile
+  .container
+    h1 Find Your Fitness Buddy
+    .user-grid
+      each user in data
+        .user-card
+          .user-info
+            h2 #{user.FirstName} #{user.LastName}
+            p.location
+              strong Location: 
+              span #{user.Location || 'Not specified'}
+            p.level
+              strong Level: 
+              span #{user.Expertise || 'Not specified'}
+          .button-group
+            a.view-profile-btn(href=`/user-single/${user.UserID}`) View Profile
+            button.request-btn(onclick="handleRequestClick(event)") Send Request
+
+  script(src="/js/userlist.js")

@@ -17,16 +17,17 @@ CREATE TABLE IF NOT EXISTS `User` (
 `DateOfBirth` DATE DEFAULT NULL,
 `ExercisePreference` CHAR(10) DEFAULT NULL,
 `Expertise` CHAR(10) DEFAULT NULL,
+`Location` VARCHAR(100) DEFAULT NULL,
 PRIMARY KEY (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Insert sample users with sample passwords (in production would be properly hashed)
-INSERT INTO `User` (`UserID`, `FirstName`, `LastName`, `Email`, `UserPasword`, `DateOfBirth`, `ExercisePreference`, `Expertise`) VALUES
-('11', 'John', 'Smith', 'john.smith@gmail.com', 'Smith123', '1990-05-15', 'Running', 'Beginner'),
-('22', 'Michelle', 'Rhoades', 'michelle.rhoades@gmail.com', 'michelle22', '1985-08-22', 'Running', 'Average'),
-('33', 'Alice', 'Johnson', 'alice.johnson@gmail.com', 'AJ1992', '1992-11-30', 'Cycling', 'Advanced'),
-('44', 'David', 'Taylor', 'david.taylor@gmail.com', 'DavidPass123', '1988-02-17', 'Cycling', 'Average'),
-('55', 'Sophia', 'Williams', 'sophia.williams@gmail.com', 'Sophia2022', '1995-12-03', 'Running', 'Beginner');
+INSERT INTO `User` (`UserID`, `FirstName`, `LastName`, `Email`, `UserPasword`, `DateOfBirth`, `ExercisePreference`, `Expertise`, `Location`) VALUES
+('11', 'John', 'Smith', 'john.smith@gmail.com', 'Smith123', '1990-05-15', 'Running', 'Beginner', 'London'),
+('22', 'Michelle', 'Rhoades', 'michelle.rhoades@gmail.com', 'michelle22', '1985-08-22', 'Running', 'Average', 'Manchester'),
+('33', 'Alice', 'Johnson', 'alice.johnson@gmail.com', 'AJ1992', '1992-11-30', 'Cycling', 'Advanced', 'Birmingham'),
+('44', 'David', 'Taylor', 'david.taylor@gmail.com', 'DavidPass123', '1988-02-17', 'Cycling', 'Average', 'Leeds'),
+('55', 'Sophia', 'Williams', 'sophia.williams@gmail.com', 'Sophia2022', '1995-12-03', 'Running', 'Beginner', 'Liverpool');
 
 -- ------------------------------------------
 -- Creating `Activity` Table

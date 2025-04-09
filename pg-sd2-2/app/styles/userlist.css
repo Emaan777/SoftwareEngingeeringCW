@@ -1,14 +1,80 @@
-.user-list {
-  list-style: none;
-  padding: 0;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .user-card {
-  background: #f5f5f5;
+  background: white;
   border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 10px;
+  padding: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.user-info h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.5em;
+}
+
+.location, .level {
+  margin: 5px 0;
+  color: #666;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.request-btn, .view-profile-btn {
+  flex: 1;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  text-align: center;
+  text-decoration: none;
+}
+
+.request-btn:hover:not(.sent), .view-profile-btn:hover {
+  background: #45a049;
+  text-decoration: none;
+}
+
+.request-btn.sent {
+  background: #999;
+  cursor: default;
+}
+
+.request-btn.sent:hover {
+  background: #999;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
 }
 
 .user-card:hover {

@@ -4,45 +4,28 @@ block styles
   link(rel='stylesheet', href='/styles/user-profile.css')
 
 block content
-  .profile-container
-    .profile-header
-      h1.profile-name #{user.FirstName} #{user.LastName}
-    
-    .profile-info
-      .info-item
-        span.info-label Email:
-        span.info-value #{user.Email}
-      .info-item
-        span.info-label Date of Birth:
-        span.info-value #{user.DateOfBirth ? new Date(user.DateOfBirth).toLocaleDateString() : 'Not specified'}
-      .info-item
-        span.info-label Exercise Preference:
-        span.info-value #{user.ExercisePreference || 'Not specified'}
-      .info-item
-        span.info-label Expertise Level:
-        span.info-value #{user.Expertise || 'Not specified'}
-    
-    a.back-button(href="/userlist") Back to User List
-
   if user
-    table
-      tr
-        th Field
-        th Value
-      tr
-        td User ID
-        td #{user.UserID}
-      tr
-        td Name
-        td #{user.FirstName} #{user.LastName}
-      tr
-        td Date of Birth
-        td #{user.DateOfBirth ? new Date(user.DateOfBirth).toLocaleDateString() : 'N/A'}
-      tr
-        td Exercise Preference
-        td #{user.ExercisePreference || 'N/A'}
-      tr
-        td Expertise
-        td #{user.Expertise || 'N/A'}
+    .profile-container
+      .profile-header
+        h1.profile-name #{user.FirstName} #{user.LastName}
+      
+      .profile-info
+        .info-item
+          span.info-label Email:
+          span.info-value #{user.Email}
+        .info-item
+          span.info-label Date of Birth:
+          span.info-value #{user.DateOfBirth ? new Date(user.DateOfBirth).toLocaleDateString() : 'Not specified'}
+        .info-item
+          span.info-label Exercise Preference:
+          span.info-value #{user.ExercisePreference || 'Not specified'}
+        .info-item
+          span.info-label Expertise Level:
+          span.info-value #{user.Expertise || 'Not specified'}
+        .info-item
+          span.info-label User ID:
+          span.info-value #{user.UserID}
+      
+      a.back-button(href="/userlist") Back to User List
   else
     p.error-message User not found 

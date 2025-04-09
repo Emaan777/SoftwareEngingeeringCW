@@ -1,0 +1,22 @@
+extends layout
+
+block styles
+  link(rel='stylesheet', href='/styles/register.css')
+
+block content
+  .register-container
+    h1 Login
+    form.register-form(action="/login" method="POST")
+      .form-group
+        label(for="email") Email:
+        input#email(type="email" name="email" required)
+      
+      .form-group
+        label(for="password") Password:
+        input#password(type="password" name="password" required)
+      
+      button.submit-btn(type="submit") Login
+      
+      .login-link
+        p Don't have an account? 
+          a(href="/register") Register here 
