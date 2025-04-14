@@ -1,0 +1,27 @@
+extends layout
+
+block styles
+  link(rel='stylesheet', href='/stylesheets/notifications.css')
+
+block content
+  .notifications-container
+    h1 Notifications
+    
+    if notifications && notifications.length > 0
+      .notification-list
+        each notification in notifications
+          .notification-item(class=notification.IsRead ? 'read' : 'unread')
+            .notification-header
+              span.notification-type #{notification.NotificationType === 'message' ? 'New Message' : notification.NotificationType === 'buddy_request' ? 'Buddy Request' : 'System Notification'}
+              span.notification-time #{new Date(notification.CreatedTime).toLocaleString()}
+            .notification-content
+              p #{notification.Content}
+            if !notification.IsRead
+              form(action='/notifications/mark-read', method='POST')
+                input(type='hidden', name='notificationId', value=notification.NotificationID)
+                button.mark-read-btn Mark as Read
+    else
+      .no-notifications
+        p You have no notifications at this time.
+    
+    a.back-button(href="/") Back to Home

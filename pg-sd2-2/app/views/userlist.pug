@@ -6,6 +6,27 @@ block styles
 block content
   .container
     h1 Find Your Fitness Buddy
+    
+    if suggestedBuddies && suggestedBuddies.length > 0
+      .suggested-section
+        h2 Buddies We Think You'll Like
+        .suggested-grid
+          each buddy in suggestedBuddies
+            .user-card.suggested-card
+              .match-badge Match!
+              .user-info
+                h2 #{buddy.FirstName} #{buddy.LastName}
+                p.location
+                  strong Location: 
+                  span #{buddy.Location || 'Not specified'}
+                p.preference
+                  strong Preference: 
+                  span #{buddy.ExercisePreference || 'Not specified'}
+              .button-group
+                a.view-profile-btn(href=`/user-single/${buddy.UserID}`) View Profile
+                button.request-btn(onclick="handleRequestClick(event, '${buddy.UserID}')") Send Request
+    
+    h2 All Users
     .user-grid
       each user in data
         .user-card
@@ -19,6 +40,7 @@ block content
               span #{user.Expertise || 'Not specified'}
           .button-group
             a.view-profile-btn(href=`/user-single/${user.UserID}`) View Profile
+            a.message-btn(href=`/messages/${user.UserID}`) Message
             button.request-btn(onclick="handleRequestClick(event)") Send Request
 
   script(src="/js/userlist.js")

@@ -13,8 +13,17 @@ html
     nav.navbar
       .nav-container
         if isLoggedIn
+          a.nav-link(href='/profile') My Profile
+          a.nav-link(href='/userlist') Find Buddies
+          a.nav-link(href='/routes') Maps
+          a.nav-link(href='/messages') Messages
+          a.nav-link(href='/notifications') Notifications
           a.nav-link(href='/logout') Log Out
         else
           a.nav-link(href='/') Home
+          a.nav-link(href='/login') Login
+          a.nav-link(href='/register') Register
     .container
       block content
+    
+    block scripts

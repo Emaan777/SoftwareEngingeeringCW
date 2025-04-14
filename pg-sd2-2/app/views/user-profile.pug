@@ -13,9 +13,10 @@ block content
         .info-item
           span.info-label Email:
           span.info-value #{user.Email}
-        .info-item
-          span.info-label Date of Birth:
-          span.info-value #{user.DateOfBirth ? new Date(user.DateOfBirth).toLocaleDateString() : 'Not specified'}
+        if isOwnProfile
+          .info-item
+            span.info-label Date of Birth:
+            span.info-value #{user.DateOfBirth ? new Date(user.DateOfBirth).toLocaleDateString() : 'Not specified'}
         .info-item
           span.info-label Exercise Preference:
           span.info-value #{user.ExercisePreference || 'Not specified'}
@@ -23,9 +24,16 @@ block content
           span.info-label Expertise Level:
           span.info-value #{user.Expertise || 'Not specified'}
         .info-item
-          span.info-label User ID:
-          span.info-value #{user.UserID}
+          span.info-label Location:
+          span.info-value #{user.Location || 'Not specified'}
+        if isOwnProfile
+          .info-item
+            span.info-label User ID:
+            span.info-value #{user.UserID}
       
-      a.back-button(href="/userlist") Back to User List
+      .profile-actions
+        if !isOwnProfile
+          a.message-button(href=`/messages/${user.UserID}`) Send Message
+        a.back-button(href="/userlist") Back to User List
   else
     p.error-message User not found 

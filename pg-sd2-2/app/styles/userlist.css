@@ -4,10 +4,117 @@
   padding: 20px;
 }
 
-h1 {
+h1, h2 {
   text-align: center;
   color: #333;
+}
+
+h1 {
   margin-bottom: 30px;
+}
+
+h2 {
+  margin: 30px 0 20px;
+}
+
+.suggested-section {
+  background: linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%);
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 50px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.suggested-section::before {
+  content: '★';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 40px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.suggested-section h2 {
+  color: white;
+  margin-top: 0;
+  font-size: 1.8em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.suggested-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.suggested-card {
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(0);
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.match-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #2196F3;
+  color: white;
+  padding: 5px 10px;
+  font-size: 0.8em;
+  font-weight: bold;
+  border-bottom-left-radius: 8px;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.suggested-card:hover .match-badge {
+  transform: translateY(-3px) rotate(3deg);
+  box-shadow: 0 3px 8px rgba(33, 150, 243, 0.3);
+}
+
+.suggested-card .user-info {
+  padding: 20px;
+  background: white;
+}
+
+.suggested-card .user-info h2 {
+  color: #2196F3;
+  text-align: left;
+  margin: 0 0 15px 0;
+  font-size: 1.4em;
+  text-shadow: none;
+}
+
+.suggested-card .button-group {
+  background: #f5f5f5;
+  padding: 15px;
+  margin-top: 0;
+}
+
+.suggested-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(33, 150, 243, 0.3);
+}
+
+.suggested-card .location strong,
+.suggested-card .preference strong {
+  color: #2196F3;
+}
+
+.preference {
+  margin: 5px 0;
+  color: #666;
 }
 
 .user-grid {
@@ -41,11 +148,11 @@ h1 {
   display: flex;
   gap: 10px;
   margin-top: 10px;
+  flex-wrap: wrap;
 }
 
-.request-btn, .view-profile-btn {
+.request-btn, .view-profile-btn, .message-btn {
   flex: 1;
-  background: #4CAF50;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -56,10 +163,24 @@ h1 {
   transition: background-color 0.3s;
   text-align: center;
   text-decoration: none;
+  min-width: 100px;
+}
+
+.view-profile-btn, .request-btn {
+  background: #4CAF50;
+}
+
+.message-btn {
+  background: #2196F3;
 }
 
 .request-btn:hover:not(.sent), .view-profile-btn:hover {
   background: #45a049;
+  text-decoration: none;
+}
+
+.message-btn:hover {
+  background: #0b7dda;
   text-decoration: none;
 }
 

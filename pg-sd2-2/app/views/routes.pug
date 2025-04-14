@@ -1,0 +1,65 @@
+extends layout
+
+block styles
+  link(rel='stylesheet', href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css')
+  link(rel='stylesheet', href='/stylesheets/routes.css')
+
+block scripts
+  script(src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js')
+  script(src='/js/map.js')
+
+block content
+  .routes-container
+    h1 Find Places to Exercise
+    
+    .map-controls
+      .control-group
+        button#locate-me.control-btn Locate Me
+        button#find-places.control-btn Find Places Nearby
+      
+      .filter-controls
+        .info-item
+          span.info-label Place Type:
+          select#place-type-filter
+            option(value="park" selected) Parks
+            option(value="trail") Trails
+            option(value="gym") Gyms
+            option(value="sports_center") Sports Centers
+        .info-item
+          span.info-label Activity:
+          select#activity-filter
+            option(value="running" selected) Running
+            option(value="cycling") Cycling
+            option(value="both") Both
+        .info-item
+          span.info-label Distance:
+          select#distance-filter
+            option(value="2") Within 2 km
+            option(value="5" selected) Within 5 km
+            option(value="10") Within 10 km
+            option(value="20") Within 20 km
+    
+    #map.map-container
+    
+    .exercise-places
+      h2 Places to Exercise Nearby
+      #places-list.places-list
+        if places && places.length > 0
+          each place in places
+            .place-item
+              .place-header
+                h3 #{place.name}
+              .place-details
+                p.type
+                  strong Type: 
+                  span #{place.type || 'Not specified'}
+                p.distance
+                  strong Distance: 
+                  span #{place.distance ? place.distance.toFixed(1) + ' km' : 'Not specified'}
+                p.address
+                  strong Address: 
+                  span #{place.address || 'Not specified'}
+              .place-actions
+                a.directions-btn(href=`https://www.google.com/maps/dir/?api=1&destination=${place.latitude},${place.longitude}` target="_blank") Get Directions
+        else
+          p.no-places No places found nearby. Try expanding your search distance.

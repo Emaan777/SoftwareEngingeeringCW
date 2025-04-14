@@ -1,28 +1,81 @@
 extends layout
 
+block styles
+  link(rel='stylesheet', href='/styles/user-profile.css')
+  link(rel='stylesheet', href='/styles/profile.css')
+
+block scripts
+  script(src='/js/profile.js')
+
 block content
-    - console.log(user)
-    .main-content 
-        h1 User Profile
-        table(border=1)
-            tr  
-                td User ID
-                td #{user.UserID}
-            tr  
-                td First Name
-                td #{user.FirstName}
-            tr  
-                td Last Name
-                td #{user.LastName}
-            tr  
-                td Email
-                td #{user.Email}
-            tr  
-                td Date of Birth
-                td #{user.DateOfBirth}
-            tr  
-                td Exercise Preference
-                td #{user.ExercisePreference}
-            tr  
-                td Expertise
-                td #{user.Expertise}
+  .profile-container
+    .profile-header
+      h1.profile-name #{user.FirstName} #{user.LastName}
+      p.profile-subtitle Your Personal Profile
+    
+    .profile-info
+      .info-section
+        h2.section-title Personal Information
+        .info-item
+          span.info-label User ID:
+          span.info-value #{user.UserID}
+        .info-item
+          span.info-label Email:
+          span.info-value #{user.Email}
+        .info-item
+          span.info-label Date of Birth:
+          span.info-value #{user.DateOfBirth ? new Date(user.DateOfBirth).toLocaleDateString() : 'Not specified'}
+      
+      .info-section
+        h2.section-title Fitness Information
+        .info-item
+          span.info-label Exercise Preference:
+          span.info-value #{user.ExercisePreference || 'Not specified'}
+        .info-item
+          span.info-label Expertise Level:
+          span.info-value #{user.Expertise || 'Not specified'}
+      
+      .action-buttons
+        button.edit-profile-btn#editProfileBtn Edit Profile
+        a.back-button(href="/userlist") Find Ride Buddies
+    
+    #editProfileModal.modal
+      .modal-content
+        span.close-btn &times;
+        h2 Edit Profile
+        form#editProfileForm(action="/profile/update" method="POST")
+          .form-group
+            label(for="firstName") First Name
+            input#firstName(type="text" name="firstName" value=user.FirstName)
+          
+          .form-group
+            label(for="lastName") Last Name
+            input#lastName(type="text" name="lastName" value=user.LastName)
+          
+          .form-group
+            label(for="email") Email
+            input#email(type="email" name="email" value=user.Email)
+          
+          .form-group
+            label(for="dob") Date of Birth
+            input#dob(type="date" name="dob" value=user.DateOfBirth ? user.DateOfBirth.toISOString().split('T')[0] : '')
+          
+          .form-group
+            label(for="exercise") Exercise Preference
+            select#exercise(name="exercise")
+              option(value="" selected=!user.ExercisePreference) Select preference
+              option(value="Running" selected=user.ExercisePreference === 'Running') Running
+              option(value="Cycling" selected=user.ExercisePreference === 'Cycling') Cycling
+              option(value="Swimming" selected=user.ExercisePreference === 'Swimming') Swimming
+              option(value="Gym" selected=user.ExercisePreference === 'Gym') Gym
+              option(value="Team Sports" selected=user.ExercisePreference === 'Team Sports') Team Sports
+          
+          .form-group
+            label(for="expertise") Expertise Level
+            select#expertise(name="expertise")
+              option(value="" selected=!user.Expertise) Select level
+              option(value="Beginner" selected=user.Expertise === 'Beginner') Beginner
+              option(value="Intermediate" selected=user.Expertise === 'Intermediate') Intermediate
+              option(value="Advanced" selected=user.Expertise === 'Advanced') Advanced
+          
+          button.submit-btn(type="submit") Save Changes

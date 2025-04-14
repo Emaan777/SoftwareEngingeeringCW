@@ -38,6 +38,18 @@ block content
           option(value="Running") Running
           option(value="Cycling") Cycling
       
+      .form-group
+        label(for="expertise") Expertise Level:
+        select#expertise(name="expertise" required)
+          option(value="") Select level...
+          option(value="Beginner") Beginner
+          option(value="Average") Intermediate
+          option(value="Advanced") Advanced
+      
+      .form-group
+        label(for="location") Location:
+        input#location(type="text" name="location" placeholder="Enter your city" required)
+      
       .terms-container
         h2 Terms and Conditions:
         .terms-text

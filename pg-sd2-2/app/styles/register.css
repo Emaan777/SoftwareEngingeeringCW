@@ -111,3 +111,22 @@ input:focus, select:focus {
 .login-link a:hover {
   text-decoration: underline;
 } 
+
+/* Validation styles */
+.error-message {
+  color: #d32f2f;
+  font-size: 14px;
+  margin-top: 5px;
+  min-height: 20px;
+}
+
+input.invalid {
+  border-color: #d32f2f;
+  background-color: rgba(211, 47, 47, 0.05);
+}
+
+#form-error {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 15px;
+}

@@ -3,17 +3,33 @@ extends layout
 block styles
   link(rel='stylesheet', href='/styles/register.css')
 
+block scripts
+  script(src='/js/login-validation.js')
+
 block content
   .register-container
     h1 Login
-    form.register-form(action="/login" method="POST")
+    form#loginForm.register-form(action="/login" method="POST" novalidate)
+      if errors && errors.form
+        .form-group
+          .error-message#server-form-error #{errors.form}
+      
       .form-group
         label(for="email") Email:
-        input#email(type="email" name="email" required)
+        input#email(type="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class=errors && errors.email ? 'invalid' : '')
+        if errors && errors.email
+          .error-message#server-email-error #{errors.email}
+        .error-message#email-error
       
       .form-group
         label(for="password") Password:
-        input#password(type="password" name="password" required)
+        input#password(type="password" name="password" required minlength="8" class=errors && errors.password ? 'invalid' : '')
+        if errors && errors.password
+          .error-message#server-password-error #{errors.password}
+        .error-message#password-error
+      
+      .form-group
+        .error-message#form-error
       
       button.submit-btn(type="submit") Login
       

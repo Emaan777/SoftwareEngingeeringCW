@@ -1,0 +1,47 @@
+extends layout
+
+block styles
+  link(rel='stylesheet', href='/stylesheets/messages.css')
+
+block content
+  .messages-container
+    h1 Messages
+    
+    .messages-sidebar
+      h2 Conversations
+      if conversations && conversations.length > 0
+        .conversation-list
+          each convo in conversations
+            a.conversation-item(href=`/messages/${convo.UserID}`, class=currentUser === convo.UserID ? 'active' : '')
+              .user-info
+                .user-name #{convo.FirstName} #{convo.LastName}
+                if convo.UnreadCount > 0
+                  .unread-badge #{convo.UnreadCount}
+      else
+        .no-conversations
+          p No conversations yet.
+      
+      a.back-button(href="/userlist") Find Buddies
+    
+    .messages-content
+      if currentUser
+        .message-header
+          h2 Conversation with #{currentUserName}
+        
+        .message-list
+          if messages && messages.length > 0
+            each message in messages
+              .message-item(class=message.SenderID === userId ? 'sent' : 'received')
+                .message-bubble
+                  p.message-text #{message.MessageContent}
+                  span.message-time #{new Date(message.SentTime).toLocaleString()}
+          else
+            .no-messages
+              p No messages in this conversation yet.
+        
+        form.message-form(action=`/messages/${currentUser}/send`, method='POST')
+          textarea(name='messageContent', placeholder='Type your message here...', required)
+          button.send-btn(type='submit') Send
+      else
+        .select-conversation
+          p Select a conversation from the sidebar or start a new one.

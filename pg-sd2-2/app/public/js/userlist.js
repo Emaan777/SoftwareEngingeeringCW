@@ -1,12 +1,18 @@
 // User list functionality 
 
-function handleRequestClick(event) {
+function handleRequestClick(event, userId) {
     const button = event.target;
     if (!button.classList.contains('sent')) {
-        button.textContent = 'Request Sent';
-        button.classList.add('sent');
-        button.disabled = true;
-        button.style.background = '#999';
+        // If we have a userId, use the sendRequest function
+        if (userId) {
+            sendRequest(userId, button);
+        } else {
+            // Fallback to simple UI update if no userId provided
+            button.textContent = 'Request Sent';
+            button.classList.add('sent');
+            button.disabled = true;
+            button.style.background = '#999';
+        }
     }
 } 
 

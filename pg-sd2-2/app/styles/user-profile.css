@@ -52,22 +52,42 @@
   flex-grow: 1;
 }
 
-.back-button {
+.profile-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.back-button, .message-button {
   display: inline-block;
-  background: #4CAF50;
-  color: white;
   padding: 12px 25px;
   border-radius: 25px;
   text-decoration: none;
-  margin-top: 20px;
   font-weight: 500;
   transition: all 0.3s ease;
 }
 
-.back-button:hover {
-  background: #45a049;
+.back-button {
+  background: #4CAF50;
+  color: white;
+}
+
+.message-button {
+  background: #2196F3;
+  color: white;
+}
+
+.back-button:hover, .message-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.back-button:hover {
+  background: #45a049;
+}
+
+.message-button:hover {
+  background: #0b7dda;
 }
 
 .error-message {

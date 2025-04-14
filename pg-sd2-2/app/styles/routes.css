@@ -1,0 +1,160 @@
+.routes-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background: rgb(245, 247, 244);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.map-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.control-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.control-btn {
+  padding: 10px 15px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.control-btn:hover {
+  background: #45a049;
+}
+
+.control-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.route-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.info-value {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+#activity-type {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.map-container {
+  height: 500px;
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+}
+
+.saved-routes {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.routes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.route-item {
+  background: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.route-item:hover {
+  transform: translateY(-5px);
+}
+
+.route-header {
+  background: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+}
+
+.route-header h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.route-details {
+  padding: 15px;
+}
+
+.route-details p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.view-route-btn {
+  background: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+.view-route-btn:hover {
+  background: #0b7dda;
+}
+
+.no-routes {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 20px;
+}
